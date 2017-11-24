@@ -16,9 +16,15 @@ def reload_symbols(target_module_obj):
 
             symbol_names = [x.name for x in node.names]
             if symbol_names[0] == '*':
-                symbol_names = [x for x in target_module.__dict__ if not x.startswith('__')]
+                if '__all__' in target_module.__dict__:
+                    symbol_names = target_module.__dict__['__all__']
+                else:
+                    symbol_names = [x for x in target_module.__dict__ if not x.startswith('__')]
 
             print 'from {} import {}'.format(node.module, node.names[0].name)
             reload(target_module)
             for symbol_name in symbol_names:
+                print '  {}.{}: {} -> {}'.format(
+                    target_module_obj.__name__, symbol_name,
+                    target_module.__dict__[symbol_name], target_module_obj.__dict__[symbol_name])
                 target_module_obj.__dict__[symbol_name] = target_module.__dict__[symbol_name]
