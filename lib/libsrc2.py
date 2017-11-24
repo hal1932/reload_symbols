@@ -5,7 +5,7 @@ lib2_global_var = None
 LIB2_GLOBAL_CONST = 1
 
 def lib2_f1():
-    print('lib2_f1a')
+    print('lib2_f1')
 
 def lib2_f2():
     pass
