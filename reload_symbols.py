@@ -40,5 +40,5 @@ def __find_symbols(module_obj):
 
     return result
 
-#import lib
-#reload_symbols(lib)
+import lib
+reload_symbols(lib)
